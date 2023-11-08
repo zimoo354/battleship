@@ -14,13 +14,14 @@ export const usePlayer = (playerName: PlayersNames) => {
   const [score, setScore] = useState(0);
 
   const placeShip = (startX: number, startY: number, vertical: boolean) => {
-    if (availableShips.length === 0) {
+    const ships = [...availableShips];
+    if (ships.length === 0) {
       throw new TypeError("You don't have more ships to place");
     }
 
-    const length = availableShips[0];
+    const [shipLength, ...remaining] = ships.slice(0);
     const coordinates: Coordinates[] = [];
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < shipLength; i++) {
       coordinates.push({
         x: startX + (vertical ? i : 0),
         y: startY + (vertical ? 0 : i),
@@ -49,12 +50,7 @@ export const usePlayer = (playerName: PlayersNames) => {
       return newBoard;
     });
 
-    setAvailableShips((prev) => {
-      const newShips = [...prev];
-      newShips.shift();
-
-      return newShips;
-    });
+    setAvailableShips(remaining);
   };
 
   const noteMadeAttack = (x: number, y: number, result: CellType) => {
