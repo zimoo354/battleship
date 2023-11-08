@@ -1,9 +1,9 @@
-import type { BoardType, CellType, Coordinates, PlayersNames } from "@/types";
+import type { BoardType, CellType, Coordinates } from "@/types";
 import { BOARD_SIZE, INITIAL_SHIPS } from "@/constants/game";
 import { createEmptyBoard } from "@/utils/helpers";
 import { useState } from "react";
 
-export const usePlayer = (playerName: PlayersNames) => {
+export const usePlayer = (playerName: string) => {
   const [shipBoard, setShipBoard] = useState<BoardType>([
     ...createEmptyBoard(BOARD_SIZE),
   ]);
