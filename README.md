@@ -2,6 +2,8 @@
 
 Prepare for an epic naval battle on the high seas. You are about to embark on a mission to seek out and destroy your opponent's fleet while protecting your own. Are you ready to strategize, target, and sink your enemy's ships?
 
+![2023-11-08 14 46 33](https://github.com/zimoo354/battleship/assets/4462901/c000abee-f0c7-456e-ba1b-76a626c377a1)
+
 ### How to run?
 
 This is easy as 1 2 3! Since it's a Next.js project you just need to run in your terminal:
