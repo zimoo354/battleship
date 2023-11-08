@@ -124,7 +124,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     if (!MULTIPLAYER && currentTurn === p2.playerName) {
       performRandomAttack(p2).catch(() => {});
     }
-  }, [attack, currentTurn, p2]);
+  }, [currentTurn, p2]);
 
   const contextValue = {
     p1,
