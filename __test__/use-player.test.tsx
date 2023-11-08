@@ -3,18 +3,19 @@
  */
 
 import { BOARD_SIZE, INITIAL_SHIPS } from "@/constants/game";
-import { usePlayer } from "@/hooks/usePlayer";
+import { usePlayer } from "@/hooks/use-player";
+import { PlayersNames } from "@/types";
 import { renderHook, act } from "@testing-library/react";
 
 describe("usePlayer", () => {
   it("should initialize the player succesfully", async () => {
-    const { result } = renderHook(() => usePlayer("Player 1"));
+    const { result } = renderHook(() => usePlayer(PlayersNames.Player1));
 
-    expect(result.current.playerName).toBe("Player 1");
+    expect(result.current.playerName).toBe(PlayersNames.Player1);
   });
 
   it("initial state is set correctly", () => {
-    const { result } = renderHook(() => usePlayer("Player 1"));
+    const { result } = renderHook(() => usePlayer(PlayersNames.Player1));
 
     expect(result.current.shipBoard).toEqual(expect.any(Array));
     expect(result.current.battleBoard).toEqual(expect.any(Array));
@@ -23,7 +24,7 @@ describe("usePlayer", () => {
   });
 
   it("placing a ship updates the shipBoard and availableShips", () => {
-    const { result } = renderHook(() => usePlayer("Player 1"));
+    const { result } = renderHook(() => usePlayer(PlayersNames.Player1));
     const startX = 0;
     const startY = 0;
     const vertical = false;
@@ -43,7 +44,7 @@ describe("usePlayer", () => {
   });
 
   it("placing a ship outside the boundaries throws an error", () => {
-    const { result } = renderHook(() => usePlayer("Player 1"));
+    const { result } = renderHook(() => usePlayer(PlayersNames.Player1));
     const startX = BOARD_SIZE;
     const startY = BOARD_SIZE;
     const vertical = false;
@@ -56,7 +57,7 @@ describe("usePlayer", () => {
   });
 
   it("recording a hit attack updates the battleBoard and score", () => {
-    const { result } = renderHook(() => usePlayer("Player 1"));
+    const { result } = renderHook(() => usePlayer(PlayersNames.Player1));
     const x = 0;
     const y = 0;
     const resultHit = "hit";
@@ -70,7 +71,7 @@ describe("usePlayer", () => {
   });
 
   it('receiving an attack on a ship returns "hit"', () => {
-    const { result } = renderHook(() => usePlayer("Player 1"));
+    const { result } = renderHook(() => usePlayer(PlayersNames.Player1));
     // Place a ship first
     act(() => {
       result.current.placeShip(0, 0, false);
@@ -85,7 +86,7 @@ describe("usePlayer", () => {
   });
 
   it('receiving an attack on an empty cell returns "miss"', () => {
-    const { result } = renderHook(() => usePlayer("Player 1"));
+    const { result } = renderHook(() => usePlayer(PlayersNames.Player1));
 
     let attackResult;
     act(() => {

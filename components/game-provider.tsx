@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { usePlayer } from "@/hooks/usePlayer";
+import { usePlayer } from "@/hooks/use-player";
 import { PlayersNames, GameStages, PlayerType } from "@/types";
 import { MAX_SCORE } from "@/constants/game";
 import { confetti } from "@/utils/animations";

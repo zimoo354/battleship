@@ -4,9 +4,10 @@ import { classNames } from "@/utils/strings";
 type CellProps = {
   type: CellType;
   onClick: () => void;
+  "data-testid"?: string;
 };
 
-export const Cell = ({ type, onClick }: CellProps) => {
+export const Cell = ({ type, onClick, ...rest }: CellProps) => {
   const getClasses = (type: CellType) => {
     switch (type) {
       case "hit":
@@ -22,11 +23,9 @@ export const Cell = ({ type, onClick }: CellProps) => {
 
   return (
     <div
+      {...rest}
       onClick={onClick}
-      className={classNames(
-        "flex h-8 w-8 justify-center items-center cursor-pointer border border-white",
-        getClasses(type)
-      )}
+      className={classNames("grid-cell", getClasses(type))}
     />
   );
 };

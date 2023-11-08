@@ -2,14 +2,14 @@ export type Coordinates = { x: number; y: number };
 export type CellType = "ship" | "miss" | "hit" | null;
 export type BoardType = CellType[][];
 export enum GameStages {
-  SETUP,
-  PLAYING,
-  GAME_ENDED,
+  SETUP = "SETUP",
+  PLAYING = "PLAYING",
+  GAME_ENDED = "GAME_ENDED",
 }
 
 export enum PlayersNames {
-  Player1 = "Player 1",
-  Player2 = "Player 2",
+  Player1 = "Player1",
+  Player2 = "Player2",
 }
 
 export type PlayerType = {

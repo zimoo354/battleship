@@ -11,13 +11,13 @@ export const Game = () => {
   const gameStarted = gameStage !== GameStages.SETUP;
 
   return (
-    <div className="flex flex-row flex-1 w-screen">
+    <div data-testid="game-container" className="flex flex-row flex-1 w-screen">
       {gameStage === GameStages.GAME_ENDED && <Winner />}
-      <SidePanel>
+      <SidePanel data-testid="sidepanel-p1">
         {gameStarted && <BattleGrid player={p1} />}
         <PlacingGrid player={p1} />
       </SidePanel>
-      <SidePanel>
+      <SidePanel data-testid="sidepanel-p2">
         {gameStarted && <BattleGrid player={p2} />}
         <PlacingGrid player={p2} />
       </SidePanel>
