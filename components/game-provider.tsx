@@ -83,27 +83,48 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   }, [p1.finishedPlacing, p2.finishedPlacing, gameStage, p1.score, p2.score]);
 
   // FOR AUTOMATED PLAY
-  const randomlyPlaceShips = async (player: PlayerType) => {
-    await sleep(100);
-    let placed = false;
-    while (!placed) {
-      const [x, y] = randomCoordinates();
-      const vertical = randomBoolean();
-
-      try {
-        player.placeShip(x, y, vertical);
-        placed = true;
-      } catch {
-        // if the placement was invalid, try again
-      }
-    }
-  };
-
   useEffect(() => {
+    const randomlyPlaceShips = async (player: PlayerType) => {
+      await sleep(100);
+      let placed = false;
+      while (!placed) {
+        const [x, y] = randomCoordinates();
+        const vertical = randomBoolean();
+
+        try {
+          player.placeShip(x, y, vertical);
+          placed = true;
+        } catch {
+          // if the placement was invalid, try again
+        }
+      }
+    };
+
     if (!MULTIPLAYER && p2.availableShips.length > 0) {
       randomlyPlaceShips(p2).catch(() => {});
     }
   }, [p2]);
+
+  useEffect(() => {
+    const performRandomAttack = async (player: PlayerType) => {
+      await sleep(500);
+      let attackMade = false;
+      while (!attackMade) {
+        const [x, y] = randomCoordinates();
+
+        try {
+          attack(player.playerName, x, y);
+          attackMade = true;
+        } catch (error) {
+          // if the attack was invalid, try again
+        }
+      }
+    };
+
+    if (!MULTIPLAYER && currentTurn === p2.playerName) {
+      performRandomAttack(p2).catch(() => {});
+    }
+  }, [attack, currentTurn, p2]);
 
   const contextValue = {
     p1,
