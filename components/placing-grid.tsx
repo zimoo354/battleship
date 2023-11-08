@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { PlayerType } from "@/types";
 import { Cell } from "./cell";
 import { Button } from "./button";
-import { classNames } from "@/utils/strings";
+import { classNames, getCellTestId } from "@/utils/strings";
 import { Error } from "./error";
 import { NowPlacing } from "./now-placing";
 
@@ -37,24 +37,24 @@ export const PlacingGrid = ({ player }: PlacingGridProps) => {
     >
       <h3>Your board</h3>
       <div className="grid grid-cols-10 bg-slate-200 border-white">
-        {player.shipBoard.map((row, rowIdx) =>
-          row.map((_c, cellIdx) => {
-            const cellKey = `${rowIdx}|${cellIdx}`;
-
-            return (
-              <Cell
-                key={cellKey}
-                onClick={() => handlePlace(rowIdx, cellIdx)}
-                type={player.shipBoard[rowIdx][cellIdx]}
-              />
-            );
-          })
+        {player.shipBoard.map((row, x) =>
+          row.map((_c, y) => (
+            <Cell
+              key={`${x}|${y}`}
+              data-testid={getCellTestId("placing", player.playerName, x, y)}
+              onClick={() => handlePlace(x, y)}
+              type={player.shipBoard[x][y]}
+            />
+          ))
         )}
       </div>
       {!player.finishedPlacing && (
         <div className="flex flex-col gap-4 justify-center items-center">
           <NowPlacing available={player.availableShips} />
-          <Button onClick={() => setVertical(!vertical)}>
+          <Button
+            data-testid="orientation-button"
+            onClick={() => setVertical(!vertical)}
+          >
             {vertical ? "Vertical ⬇️" : "Horizontal ➡️"}
           </Button>
         </div>

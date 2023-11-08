@@ -1,7 +1,9 @@
-import { PropsWithChildren as SidePanelProps } from "react";
+import { HTMLAttributes } from "react";
 
-export const SidePanel = ({ children }: SidePanelProps) => (
-  <div className="flex flex-col justify-center items-center w-full">
+type SidePanelProps = HTMLAttributes<HTMLDivElement>;
+
+export const SidePanel = ({ children, ...rest }: SidePanelProps) => (
+  <div {...rest} className="flex flex-col justify-center items-center w-full">
     {children}
   </div>
 );

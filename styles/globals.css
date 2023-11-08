@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url(./markdown.css);
+@import url(./game.css);
 
 body {
   @apply bg-gradient-to-b from-white to-slate-200;

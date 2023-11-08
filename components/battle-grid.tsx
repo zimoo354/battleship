@@ -1,6 +1,6 @@
 import type { PlayerType } from "@/types";
 import { Cell } from "./cell";
-import { classNames } from "@/utils/strings";
+import { classNames, getCellTestId } from "@/utils/strings";
 import { useGame } from "./game-provider";
 import { useState } from "react";
 import { Error } from "./error";
@@ -37,13 +37,16 @@ export const BattleGrid = ({ player }: BattleGridProps) => {
           row.map((_c, y) => (
             <Cell
               key={`${x}|${y}`}
+              data-testid={getCellTestId("battle", player.playerName, x, y)}
               onClick={() => handleAttack(x, y)}
               type={player.battleBoard[x][y]}
             />
           ))
         )}
       </div>
-      <p className="text-center">Score: {player.score}</p>
+      <p data-testid="player-score" className="text-center">
+        Score: {player.score}
+      </p>
       <Error content={error} />
     </div>
   );
