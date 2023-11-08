@@ -4,7 +4,10 @@ const config = async (): Promise<Config.InitialOptions> => {
     preset: "ts-jest",
 
     transform: {
-      "^.+\\.(ts|tsx|js|jsx)?$": "babel-jest",
+      "^.+\\.(ts|tsx|js|jsx)?$": [
+        "babel-jest",
+        { configFile: "./jest.babel.config.js" },
+      ],
     },
     transformIgnorePatterns: ["<rootDir>/node_modules/"],
 
