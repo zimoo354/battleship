@@ -1,0 +1,29 @@
+.markdown {
+  @apply flex flex-col gap-4;
+}
+
+.markdown h1 {
+  @apply text-3xl;
+}
+.markdown h2 {
+  @apply text-2xl;
+}
+.markdown h3 {
+  @apply text-xl;
+}
+
+.markdown b {
+  @apply font-semibold;
+}
+
+.markdown li {
+  margin-left: 1.5rem;
+}
+
+.markdown ol li {
+  list-style-type: decimal;
+}
+
+.markdown ul li {
+  list-style-type: disc;
+}
