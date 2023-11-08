@@ -44,7 +44,9 @@ export const BattleGrid = ({ player }: BattleGridProps) => {
           ))
         )}
       </div>
-      <p className="text-center">Score: {player.score}</p>
+      <p data-testid="player-score" className="text-center">
+        Score: {player.score}
+      </p>
       <Error content={error} />
     </div>
   );
