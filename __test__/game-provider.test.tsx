@@ -3,17 +3,14 @@
  */
 
 import React, { PropsWithChildren, RefObject } from "react";
-import { renderHook, render, act, waitFor } from "@testing-library/react";
+import { renderHook, act, waitFor } from "@testing-library/react";
 import {
   GameContextType,
   GameProvider,
   useGame,
 } from "@/components/game-provider";
 import { GameStages, PlayersNames } from "@/types";
-import { Game } from "@/features/game";
-import { getCellTestId } from "@/utils/strings";
 import { BOARD_SIZE, INITIAL_SHIPS, MAX_SCORE } from "@/constants/game";
-import { sleep } from "@/utils/helpers";
 
 const renderGameHook = (hookCb: () => any) => {
   const wrapper = ({ children }: PropsWithChildren) => (
