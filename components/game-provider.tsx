@@ -66,7 +66,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
   // Update Game State
   useEffect(() => {
-    console.log("x");
     if (
       gameStage === GameStages.SETUP &&
       p1.finishedPlacing &&
