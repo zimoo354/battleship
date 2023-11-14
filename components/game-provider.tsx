@@ -66,6 +66,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
   // Update Game State
   useEffect(() => {
+    console.log("x");
     if (
       gameStage === GameStages.SETUP &&
       p1.finishedPlacing &&
@@ -125,7 +126,11 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       }
     };
 
-    if (!MULTIPLAYER && currentTurn === p2.playerName) {
+    if (
+      !MULTIPLAYER &&
+      currentTurn === p2.playerName &&
+      gameStage === GameStages.PLAYING
+    ) {
       performRandomAttack(p2).catch(() => {});
     }
   }, [currentTurn, p2]);
