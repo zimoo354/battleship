@@ -11,13 +11,14 @@ import { MULTIPLAYER, MAX_SCORE } from "@/constants/game";
 import { confetti } from "@/utils/animations";
 import { randomBoolean, randomCoordinates, sleep } from "@/utils/helpers";
 
-type GameContextType =
+export type GameContextType =
   | undefined
   | {
       p1: PlayerType;
       p2: PlayerType;
       gameStage: GameStages;
       winner?: PlayersNames;
+      currentTurn: PlayersNames;
       attack: (from: PlayersNames, x: number, y: number) => void;
     };
 
@@ -42,10 +43,13 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const attack = (from: PlayersNames, x: number, y: number) => {
-    if (gameStage)
-      if (from !== currentTurn) {
-        throw new TypeError("It's not your turn");
-      }
+    if (gameStage !== GameStages.PLAYING) {
+      throw new TypeError("Not playing");
+    }
+
+    if (from !== currentTurn) {
+      throw new TypeError("It's not your turn");
+    }
 
     const attacking = from === PlayersNames.Player1 ? p1 : p2;
     const beingAttacked = from === PlayersNames.Player1 ? p2 : p1;
@@ -132,6 +136,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     gameStage,
     attack,
     winner,
+    currentTurn,
   };
 
   return (
